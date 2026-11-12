@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" role="img" aria-label="Sahara Health Cluster favicon">
+  <rect width="32" height="32" rx="8" fill="#009F9A"/>
+  <rect x="4" y="4" width="24" height="24" rx="6" fill="none" stroke="white" stroke-width="2.5"/>
+  <path d="M9 16 C9 11 23 11 23 16 C23 21 9 21 9 16 Z" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <path d="M14 16 C14 14 18 14 18 16 C18 18 14 18 14 16 Z" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="16" cy="16" r="2" fill="white"/>
+</svg>
