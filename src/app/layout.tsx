@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     images: [
       {
-        url: "/og-cover.png",
+        url: "/og-cover.svg",
         width: 1200,
         height: 630,
         alt: "Sahara Health Cluster — Eye, Dental & General Medical Centre",
@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sahara Health Cluster — Eye, Dental & General Medical Centre",
     description:
-      "Sahara Health Cluster in Amruthalli, Bangalore — Eye, Dental and General Medical Centre. Trusted care, advanced technology.",
-    images: ["/og-cover.png"],
+      "Sahara Health Cluster in Amruthalli, Bangalore — Eye, Dental and General Medical Centre. Trusted care, advanced technology. Book an appointment today.",
+    images: ["/og-cover.svg"],
   },
   robots: {
     index: true,
@@ -68,7 +68,7 @@ export default function RootLayout({
     name: clinic.name,
     description: `${clinic.name} — ${clinic.tagline} in ${clinic.address.full}.`,
     url: siteUrl,
-    telephone: clinic.phones[0].tel,
+    telephone: clinic.phones.map((p) => p.tel),
     address: {
       "@type": "PostalAddress",
       streetAddress: clinic.address.line1,
@@ -76,17 +76,6 @@ export default function RootLayout({
       postalCode: "560092",
       addressCountry: "IN",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "13.0301",
-      longitude: "77.6622",
-    },
-    medicalSpecialty: [
-      "Ophthalmology",
-      "Dentistry",
-      "General Practice",
-    ],
-    priceRange: "$$",
   };
 
   return (
@@ -100,6 +89,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-white text-ink antialiased">
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         {children}
       </body>
     </html>

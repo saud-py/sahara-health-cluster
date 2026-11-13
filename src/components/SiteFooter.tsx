@@ -12,7 +12,7 @@ const NAV_LINKS = [
 ];
 
 export function SiteFooter() {
-  const PHONES = [...clinic.phones, ...clinic.secondaryPhones];
+  const PHONES = clinic.phones;
 
   return (
     <footer className="border-t border-mint bg-brand-deep text-white">

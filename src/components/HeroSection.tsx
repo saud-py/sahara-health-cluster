@@ -1,23 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { clinic } from "@/config/clinic";
 import { PhoneIcon } from "./icons";
 
-const PHONES = [...clinic.phones, ...clinic.secondaryPhones];
+const PHONES = clinic.phones;
 
 export function HeroSection() {
-  const [scrolled, setScrolled] = useState(false);
   const [reveal, setReveal] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 0);
     setReveal(true);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -107,7 +101,7 @@ export function HeroSection() {
           <div className="relative z-10 max-w-md mx-auto">
             <svg
               viewBox="0 0 200 200"
-              className="w-full max-w-[340px] drop-shadow-[0_20px_40px_rgba(0,107,104,0.25)]"
+              className="w-full max-w-[340px]"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -116,12 +110,8 @@ export function HeroSection() {
                   <stop offset="0%" stopColor="#009F9A" />
                   <stop offset="100%" stopColor="#006B68" />
                 </linearGradient>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="14" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
               </defs>
-              <circle cx="100" cy="100" r="90" fill="url(#heroGrad)" filter="url(#glow)" />
+              <circle cx="100" cy="100" r="90" fill="url(#heroGrad)" />
               <circle cx="100" cy="100" r="62" fill="none" stroke="#08B7B0" strokeWidth="10" strokeDasharray="60 40" />
               <path d="M55 100 Q55 60 100 60 Q145 60 145 100 Q145 140 100 140 Q55 140 55 100" fill="none" stroke="white" strokeWidth="5" strokeLinecap="round" />
               <circle cx="100" cy="100" r="7" fill="white" />

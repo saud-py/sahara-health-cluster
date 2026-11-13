@@ -5,7 +5,7 @@ import { clinic } from "@/config/clinic";
 import { PhoneIcon, MapPinIcon, ClockIcon } from "./icons";
 
 export function ContactDetails() {
-  const PHONES = [...clinic.phones, ...clinic.secondaryPhones];
+  const PHONES = clinic.phones;
 
   return (
     <section id="contact" className="section-py bg-brand-aqua">
@@ -60,14 +60,20 @@ export function ContactDetails() {
                 <p className="text-xs font-semibold uppercase tracking-wide text-brand-deep mb-1">
                   Opening Hours
                 </p>
-                <ul className="space-y-1 text-sm text-ink">
-                  {clinic.openingHours.map((h) => (
-                    <li key={h.days}>
-                      <span className="font-medium text-brand-deep">{h.days}</span>{" "}
-                      {h.hours}
-                    </li>
-                  ))}
-                </ul>
+                {clinic.openingHours.length > 0 ? (
+                  <ul className="space-y-1 text-sm text-ink">
+                    {clinic.openingHours.map((h) => (
+                      <li key={h.days}>
+                        <span className="font-medium text-brand-deep">{h.days}</span>{" "}
+                        {h.hours}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span className="text-sm text-ink-muted">
+                    [Hours pending confirmation — call us]
+                  </span>
+                )}
               </div>
             </div>
           </div>

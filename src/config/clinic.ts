@@ -5,7 +5,6 @@
  * Anything marked [PLACEHOLDER] must be confirmed with the clinic owner
  * before going live — never invent values for these fields.
  */
-
 export const clinic = {
   name: "Sahara Health Cluster",
   tagline: "Eye, Dental & General Medical Centre",
@@ -26,25 +25,19 @@ export const clinic = {
   // Confirmed phone numbers. tel: links must use the India country code (+91).
   phones: [
     { raw: "9743453077", tel: "tel:+919743453077", label: "Call for appointment" },
+    { raw: "9964099117", tel: "tel:+919964099117", label: "Call for appointment" },
+    { raw: "9620541210", tel: "tel:+919620541210", label: "Call for appointment" },
   ],
 
-  // [PLACEHOLDER] — confirmed phone numbers from the owner may include a second line.
-  // Add the second number here once confirmed, e.g. { raw: "9964099117", tel: "tel:+919964099117", label: "Call for appointment" }.
-  secondaryPhones: [] as { raw: string; tel: string; label: string }[],
+  // Email, website, and opening hours are [PLACEHOLDER] — unconfirmed.
+  // Do not present these as verified facts. Add them only after owner confirmation.
+  email: null as string | null,
+  website: null as string | null,
+  // Opening days/hours are not confirmed. Omit from UI until verified.
+  openingHours: [] as { days: string; hours: string }[],
 
-  // [PLACEHOLDER] — not yet confirmed. Leave empty to omit from the UI.
-  email: "" as string | null,
-  // [PLACEHOLDER] — not yet confirmed. Leave empty to omit from the UI.
-  website: "" as string | null,
-
-  // [PLACEHOLDER] — not yet confirmed.
-  openingHours: [
-    { days: "Monday – Saturday", hours: "9:00 AM – 8:00 PM" },
-    { days: "Sunday", hours: "[PLACEHOLDER — confirm opening hours]" },
-  ],
-
-  // [PLACEHOLDER] — not yet confirmed. Leave empty to omit.
-  // e.g. "https://www.google.com/maps/place/?q=place_id:..." once a verified map pin is supplied.
+  // Map/directions URL — [PLACEHOLDER] requiring verified map pin from owner.
+  // e.g. "https://www.google.com/maps/place/?q=place_id:..." once supplied.
   directionsUrl: "" as string | null,
 
   // Care values from the flyer — brand messaging only, not clinical claims.
@@ -57,6 +50,7 @@ export const clinic = {
 
   services: [
     {
+      id: "eyecare",
       title: "Eye Care",
       tagline: "Clear Vision. Brighter Tomorrow.",
       description:
@@ -64,6 +58,7 @@ export const clinic = {
       icon: "eye",
     },
     {
+      id: "dental",
       title: "Dental Care",
       tagline: "Healthy Smiles. Lasting Confidence.",
       description:
@@ -71,6 +66,7 @@ export const clinic = {
       icon: "tooth",
     },
     {
+      id: "family-care",
       title: "General Medical Care",
       tagline: "Complete Care. For Every Stage.",
       description:
@@ -85,13 +81,14 @@ export const clinic = {
   assets: {
     // Placeholder QR — replace with the real supplied QR image.
     // Place the real QR at: public/images/location-qr.png (per CLAUDE.md)
+    // Currently using the supplied SVG asset: public/images/location-qr.svg
     qr: "/images/location-qr.svg",
     // Real clinic photos supplied in the repository.
     photos: {
-      exterior: "/images/clinic-exterior.jpg",
-      reception: "/images/clinic-reception.jpg",
-      examRoomA: "/images/clinic-exam-room.jpg",
-      examRoomB: "/images/clinic-exam-room-2.jpg",
+      exterior: "/images/clinic-exterior.webp",
+      reception: "/images/clinic-reception.webp",
+      examRoomA: "/images/clinic-exam-room.webp",
+      examRoomB: "/images/clinic-exam-room-2.webp",
     },
   },
 };

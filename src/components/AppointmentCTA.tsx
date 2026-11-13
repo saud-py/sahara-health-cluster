@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { clinic } from "@/config/clinic";
 
-const PHONES = [...clinic.phones, ...clinic.secondaryPhones];
+const PHONES = clinic.phones;
 
 export function AppointmentCTA() {
   return (

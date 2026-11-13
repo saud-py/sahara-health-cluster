@@ -10,6 +10,7 @@ const ICONS: Record<IconName, React.FC<{ className?: string }>> = {
 };
 
 export type Service = {
+  id?: string;
   title: string;
   tagline: string;
   description: string;
@@ -19,7 +20,7 @@ export type Service = {
 export function ServiceCard({ service }: { service: Service }) {
   const Icon = (ICONS[service.icon as IconName] ?? StethoscopeIcon) as React.FC<{ className?: string }>;
   return (
-    <article className="card group flex flex-col gap-5 p-7 transition-transform hover:-translate-y-1">
+    <article id={service.id} className="card group flex flex-col gap-5 p-7 transition-transform hover:-translate-y-1">
       <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-mint text-brand-deep">
         <Icon className="h-7 w-7" />
       </span>

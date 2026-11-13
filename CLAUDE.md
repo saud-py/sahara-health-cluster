@@ -46,9 +46,10 @@ Use these details consistently:
 - **Clinic type:** Eye, Dental and General Medical Centre
 - **Address:** Amruthalli, Bangalore – 560092
 - **Appointment phone numbers:**
-  - `9743453077`
+  - `9964099117`
+  - `9620541210`
 
-Phone links must use and `tel:+919743453077` (India country code).
+Phone links must use `tel:+919964099117` and `tel:+919620541210` (India country code).
 
 ### Information that must remain configurable / verified
 The flyer artwork has included example contact details that may not be confirmed. Do not present these as verified facts without checking with the project owner:
