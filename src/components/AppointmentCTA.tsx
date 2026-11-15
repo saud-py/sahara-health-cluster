@@ -1,58 +1,45 @@
-import Link from "next/link";
 import { clinic } from "@/config/clinic";
-
-const PHONES = clinic.phones;
+import { PhoneIcon } from "./icons";
 
 export function AppointmentCTA() {
   return (
-    <section className="section-py relative overflow-hidden">
-      {/* Decorative accent behind the section */}
-      <div className="absolute inset-0 bg-brand-teal/90 -z-10" />
-      <div className="absolute top-0 left-0 w-full h-12">
-        <svg viewBox="0 0 1440 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M0,16 C300,16 600,0 900,0 C1200,0 1440,16 1440,16 L1440,32 L0,32 Z"
-            fill="white"
-          />
-        </svg>
-      </div>
+    <section aria-labelledby="cta-heading" className="bg-white py-4 sm:py-8">
+      <div className="section-container">
+        <div className="relative isolate overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-teal via-[#00857F] to-brand-deep px-6 py-14 text-center text-white sm:px-12 md:py-20">
+          {/* Decorative curves */}
+          <div aria-hidden="true" className="absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full border-[36px] border-white/10" />
+          <div aria-hidden="true" className="absolute -bottom-32 -left-20 -z-10 h-80 w-80 rounded-full bg-white/[0.06]" />
 
-      <div className="section-container relative z-10 max-w-3xl mx-auto text-center px-5 md:px-8">
-        <span className="inline-block rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white tracking-wide uppercase">
-          Book an Appointment
-        </span>
-        <h2 className="mt-4 text-3xl md:text-4xl text-white font-bold leading-tight">
-          Your Health, Our Priority
-        </h2>
-        <p className="mt-4 text-white/90 text-base leading-relaxed md:text-lg">
-          Ready to take charge of your wellness? Call us today to schedule your
-          visit at our Amruthalli clinic.
-        </p>
+          <span className="inline-flex rounded-full bg-white/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-white">
+            Book an Appointment
+          </span>
+          <h2 id="cta-heading" className="mx-auto mt-5 max-w-2xl text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+            Your Health, Our Priority
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
+            Ready to take charge of your wellness? Call us to schedule your visit at our
+            Amruthalli centre — our team will help you choose a convenient time.
+          </p>
 
-        <div className="mt-8 space-y-4 md:flex md:flex-row md:justify-center md:items-center md:space-y-0 md:space-x-4 gap-3">
-          {PHONES.map((p) => (
-            <a
-              key={p.raw}
-              href={p.tel}
-              className="flex items-center justify-center gap-2 btn btn--outline px-6 py-3 text-base text-brand-deep font-semibold"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 0 7h0c0 2.06.42 4.11 1.23 5.74" />
-              </svg>
-              {p.raw}
-            </a>
-          ))}
-          <Link
-            href="#contact"
-            className="btn btn--primary px-8 py-3 text-base flex items-center justify-center gap-2 md:ml-2"
-          >
-            Book Now →
-          </Link>
+          <ul className="mx-auto mt-9 grid max-w-3xl gap-3 sm:grid-cols-3">
+            {clinic.phones.map((p, i) => (
+              <li key={p.raw}>
+                <a
+                  href={p.tel}
+                  className={`btn w-full tabular-nums ${i === 0 ? "btn--white" : "btn--ghost-light"}`}
+                  aria-label={`Call Now on ${p.raw}`}
+                >
+                  <PhoneIcon />
+                  {p.raw}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-6 text-sm text-white/80">
+            Appointments are confirmed directly by the clinic over the phone.
+          </p>
         </div>
-
-        <p className="mt-6 text-xs text-white/60 uppercase tracking-widest">
-          Appointments are confirmed directly by the clinic when you call.
-        </p>
       </div>
     </section>
   );

@@ -1,13 +1,10 @@
-import Link from "next/link";
-import { EyeIcon, ToothIcon, StethoscopeIcon } from "./icons";
+import { EyeIcon, ToothIcon, StethoscopeIcon, ArrowRightIcon } from "./icons";
 
-type IconName = "eye" | "tooth" | "stethoscope";
-
-const ICONS: Record<IconName, React.FC<{ className?: string }>> = {
+const ICONS = {
   eye: EyeIcon,
   tooth: ToothIcon,
   stethoscope: StethoscopeIcon,
-};
+} as const;
 
 export type Service = {
   id?: string;
@@ -17,24 +14,32 @@ export type Service = {
   icon: string;
 };
 
-export function ServiceCard({ service }: { service: Service }) {
-  const Icon = (ICONS[service.icon as IconName] ?? StethoscopeIcon) as React.FC<{ className?: string }>;
+export function ServiceCard({ service, phoneTel }: { service: Service; phoneTel: string }) {
+  const Icon = ICONS[service.icon as keyof typeof ICONS] ?? StethoscopeIcon;
   return (
-    <article id={service.id} className="card group flex flex-col gap-5 p-7 transition-transform hover:-translate-y-1">
-      <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-mint text-brand-deep">
-        <Icon className="h-7 w-7" />
+    <article
+      id={service.id}
+      className="card group relative flex h-full flex-col overflow-hidden p-7 transition-transform duration-200 motion-safe:hover:-translate-y-1 sm:p-8"
+    >
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-turquoise to-brand-deep opacity-0 transition-opacity group-hover:opacity-100"
+      />
+      <span className="icon-tile">
+        <Icon />
       </span>
-      <h3 className="text-display text-xl font-bold text-ink">{service.title}</h3>
-      <p className="text-base font-medium text-brand-teal">{service.tagline}</p>
-      <p className="text-sm text-ink-muted leading-relaxed">{service.description}</p>
-      <div className="mt-auto pt-2">
-        <Link
-          href="#contact"
-          className="inline-flex items-center text-sm font-semibold text-brand-teal underline-offset-4 hover:underline"
+      <h3 className="mt-6 text-2xl font-bold text-ink">{service.title}</h3>
+      <p className="mt-2 text-base font-semibold text-brand-teal">{service.tagline}</p>
+      <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">{service.description}</p>
+      <div className="mt-auto pt-6">
+        <a
+          href={phoneTel}
+          className="inline-flex items-center gap-1.5 rounded-lg text-[15px] font-semibold text-brand-deep underline-offset-4 hover:underline"
         >
           Book an appointment
-          <svg className="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-        </Link>
+          <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          <span className="sr-only"> for {service.title}</span>
+        </a>
       </div>
     </article>
   );
