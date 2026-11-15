@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { clinic } from "@/config/clinic";
 import "./globals.css";
 
@@ -57,13 +57,6 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  viewportFit: "cover",
-  themeColor: "#006B68",
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -86,8 +79,10 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" className="scroll-smooth">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta charSet="utf-8" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

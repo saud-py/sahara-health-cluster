@@ -1,24 +1,28 @@
-import { clinic } from "@/config/clinic";
-import { NavigationIcon, PhoneIcon } from "./icons";
+"use client";
 
-/** Compact sticky bottom bar shown on small screens only. */
+import Link from "next/link";
+import { clinic } from "@/config/clinic";
+
 export function MobileActionBar() {
   return (
-    <nav
-      aria-label="Quick actions"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-brand-mint bg-white/95 px-4 pt-2.5 backdrop-blur-md md:hidden"
-      style={{ paddingBottom: "calc(0.625rem + env(safe-area-inset-bottom))" }}
-    >
-      <div className="mx-auto grid max-w-md grid-cols-2 gap-3">
-        <a href={clinic.phones[0].tel} className="btn btn--primary btn--sm">
-          <PhoneIcon />
-          Call
-        </a>
-        <a href="#location" className="btn btn--outline btn--sm">
-          <NavigationIcon />
-          Directions
-        </a>
-      </div>
+    <nav className="mobile-bar">
+      <a
+        href={clinic.phones[0].tel}
+        className="active"
+        aria-label="Call Sahara Health Cluster"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 0 7h0c0 2.06.42 4.11 1.23 5.74" />
+        </svg>
+        <span>Call</span>
+      </a>
+      <a href="#location" aria-label="Get directions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+        <span>Directions</span>
+      </a>
     </nav>
   );
 }
