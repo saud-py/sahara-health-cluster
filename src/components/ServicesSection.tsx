@@ -1,20 +1,23 @@
 import { clinic } from "@/config/clinic";
-import { ServiceCard } from "./ServiceCard";
-import { SectionHeading } from "./SectionHeading";
+import { ServiceCard, type Service } from "./ServiceCard";
 
 export function ServicesSection() {
   return (
-    <section id="services" aria-labelledby="services-heading" className="section-py bg-brand-aqua">
+    <section id="services" className="section-py bg-white">
       <div className="section-container">
-        <SectionHeading
-          id="services-heading"
-          eyebrow="Our Services"
-          title="Comprehensive Care, Under One Roof"
-          description="Eye, dental and general medical care for you and your family — all at one welcoming centre in Amruthalli."
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-3 lg:mt-14">
-          {clinic.services.map((service) => (
-            <ServiceCard key={service.id} service={service} phoneTel={clinic.phones[0].tel} />
+        <div className="section-head">
+          <span className="inline-block rounded-full bg-brand-mint px-3 py-1 text-xs font-semibold text-brand-deep tracking-wide uppercase">
+            Our Services
+          </span>
+          <h2 className="mt-4 text-3xl md:text-4xl text-ink">Comprehensive Care, Under One Roof</h2>
+          <p className="sub">
+            From routine check-ups to specialised care, our team is here to support you and your family.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {clinic.services.map((service: Service) => (
+            <ServiceCard key={service.title} service={service} />
           ))}
         </div>
       </div>

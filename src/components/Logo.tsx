@@ -4,62 +4,74 @@ import { cn } from "@/lib/utils";
 /**
  * Sahara Health Cluster logo.
  *
- * PLACEHOLDER: the supplied logo file is not in the repository. This renders the
- * mark as described in the brand brief — a white abstract eye/spiral with a small
- * central dot inside a rounded square.
+ * The supplied logo asset was not present in the repository. This is a clearly
+ * named PLACEHOLDER component rendering the brand mark exactly as described in
+ * CLAUDE.md: a white abstract eye/spiral mark with a small central dot, placed
+ * inside a rounded square.
  *
- * TODO: Replace <LogoMark /> with the supplied asset.
- *   - Place the real logo at: public/images/sahara-logo.svg (or .png)
- *   - Render it with <img src="/images/sahara-logo.svg" alt="" /> inside LogoMark.
+ * TODO: Replace the inner <svg> with the supplied logo asset.
+ *   - Place the real logo file at: public/images/sahara-logo.png (or .svg)
+ *   - Update this component to render <img src="/images/sahara-logo.png" ... />
  *   - Do NOT invent a different brand mark.
  */
 
-export function LogoMark({ className }: { className?: string }) {
-  return (
+type LogoProps = {
+  className?: string;
+  /** When true, renders a light-colour variant for use on teal backgrounds. */
+  light?: boolean;
+  showWordmark?: boolean;
+};
+
+export function Logo({ className, light = false, showWordmark = true }: LogoProps) {
+  const mark = (
     <span
       className={cn(
-        "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-gradient-to-br from-brand-teal to-brand-deep",
+        "inline-flex h-11 w-11 items-center justify-center rounded-2xl",
+        light ? "bg-white/90" : "bg-brand-teal",
         className
       )}
       aria-hidden="true"
     >
-      <svg viewBox="0 0 48 48" width="30" height="30" fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width="34"
+        height="34"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Outer rounded square frame */}
+        <rect x="4" y="4" width="40" height="40" rx="12" stroke="white" strokeWidth="3" />
+        {/* Abstract eye / spiral mark with central dot */}
         <path
-          d="M8 24c4-7 9.5-10.5 16-10.5S36 17 40 24c-4 7-9.5 10.5-16 10.5S12 31 8 24z"
+          d="M14 24 C14 18 34 18 34 24 C34 30 14 30 14 24 Z"
           stroke="white"
           strokeWidth="3"
-          strokeLinejoin="round"
+          fill="none"
+          strokeLinecap="round"
         />
         <path
-          d="M24 17.5a6.5 6.5 0 1 1-6.5 6.5"
+          d="M20 24 C20 21 28 21 28 24 C28 27 20 27 20 24 Z"
           stroke="white"
-          strokeWidth="3"
+          strokeWidth="2.4"
+          fill="none"
           strokeLinecap="round"
         />
         <circle cx="24" cy="24" r="2.6" fill="white" />
       </svg>
     </span>
   );
-}
 
-type LogoProps = {
-  /** Light wordmark for use on dark/teal backgrounds. */
-  light?: boolean;
-  className?: string;
-};
+  if (!showWordmark) {
+    return mark;
+  }
 
-export function Logo({ light = false, className }: LogoProps) {
   return (
-    <Link
-      href="/"
-      className={cn("inline-flex min-w-0 items-center gap-3 rounded-xl", className)}
-      aria-label="Sahara Health Cluster — home"
-    >
-      <LogoMark />
-      <span className="flex min-w-0 flex-col leading-none">
+    <Link href="/" className="inline-flex items-center gap-3">
+      {mark}
+      <span className="flex flex-col leading-none">
         <span
           className={cn(
-            "truncate text-[15px] font-extrabold tracking-[0.04em] sm:text-base",
+            "text-lg font-bold tracking-tight",
             light ? "text-white" : "text-ink"
           )}
         >
@@ -67,8 +79,8 @@ export function Logo({ light = false, className }: LogoProps) {
         </span>
         <span
           className={cn(
-            "mt-1 truncate text-[11px] font-semibold uppercase tracking-[0.12em]",
-            light ? "text-brand-mint/80" : "text-brand-teal"
+            "mt-0.5 text-[11px] font-medium tracking-wide uppercase",
+            light ? "text-white/80" : "text-brand-teal"
           )}
         >
           Your Vision, Our Mission

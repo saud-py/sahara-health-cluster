@@ -1,98 +1,106 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 import { clinic } from "@/config/clinic";
-import { MapPinIcon, NavigationIcon, PhoneIcon } from "./icons";
-import { SectionHeading } from "./SectionHeading";
+import { MapPinIcon, PhoneIcon } from "./icons";
 
 export function LocationSection() {
-  const { directionsUrl } = clinic;
-  const { qr, qrIsPlaceholder, photos } = clinic.assets;
-  const sign = photos.signboard;
+  const directionsUrl = clinic.directionsUrl;
+  const qrSrc = clinic.assets.qr;
 
   return (
-    <section id="location" aria-labelledby="location-heading" className="section-py bg-brand-aqua">
+    <section id="location" className="section-py bg-white">
       <div className="section-container">
-        <SectionHeading
-          id="location-heading"
-          eyebrow="Visit Us"
-          title="Find Our Centre"
-          description="Conveniently located in Amruthalli, Bangalore. Look for the Sahara Health Cluster signboard above the entrance."
-        />
+        <div className="section-head">
+          <span className="inline-block rounded-full bg-brand-mint px-3 py-1 text-xs font-semibold text-brand-deep tracking-wide uppercase">
+            Visit Us
+          </span>
+          <h2 className="mt-4 text-3xl md:text-4xl text-ink">Find Our Centre</h2>
+        </div>
 
-        <div className="mt-12 grid gap-6 lg:mt-14 lg:grid-cols-2 lg:items-stretch">
-          {/* Address + QR, grouped */}
-          <div className="card flex flex-col p-6 sm:p-8">
-            <div className="flex items-start gap-4">
-              <span className="icon-tile">
-                <MapPinIcon />
-              </span>
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-teal">Address</p>
-                <address className="mt-1 text-xl font-bold not-italic leading-snug text-ink sm:text-2xl">
-                  {clinic.name}
-                  <br />
-                  <span className="font-semibold text-ink-muted">{clinic.address.full}</span>
-                </address>
-              </div>
+        <div className="grid gap-8 lg:grid-cols-2 items-start">
+          {/* Address + QR grouped together */}
+          <div className="card p-8 lg:p-10">
+            <h3 className="text-display text-2xl font-bold text-ink mb-3">
+              {clinic.address.full}
+            </h3>
+            <p className="text-base text-ink-muted leading-relaxed mb-6">
+              We are conveniently located in Amruthalli, Bangalore. Scan the code
+              below to save our location on your phone and find directions easily.
+            </p>
+
+            <div className="mb-6 flex items-center gap-3">
+              <MapPinIcon className="w-5 h-5 text-brand-teal flex-shrink-0" />
+              <p className="text-sm text-ink">{clinic.address.full}</p>
             </div>
 
-            <hr className="my-7 border-brand-mint" />
-
-            <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-center sm:text-left">
-              <div className="qr-frame shrink-0">
-                {/* Plain <img>: the QR must be shown exactly as supplied — no optimisation, cropping or effects. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={qr}
-                  alt={
-                    qrIsPlaceholder
-                      ? "Placeholder for the Sahara Health Cluster location QR code"
-                      : "QR code linking to the Sahara Health Cluster location in Amruthalli, Bangalore"
-                  }
-                  width={208}
-                  height={208}
+            <div className="space-y-3 mb-8">
+              <p className="text-sm font-semibold text-brand-deep uppercase tracking-wide">
+                Scan for Location
+              </p>
+              <div className="qr-wrap">
+                <Image
+                  src={qrSrc}
+                  alt="Location QR code for Sahara Health Cluster, Amruthalli Bangalore"
+                  width={200}
+                  height={200}
+                  priority
+                  className="rounded-lg border border-mint shadow-sm"
+                  onError={(e) => {
+                    const img = e.currentTarget;
+                    img.style.display = "none";
+                  }}
                 />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-ink">Scan for Location</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">
-                  {qrIsPlaceholder
-                    ? "Our location QR code will appear here shortly. Meanwhile, call us and we’ll guide you to the centre."
-                    : "Point your phone camera at the code to open our location and get turn-by-turn directions."}
-                </p>
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                  {directionsUrl ? (
-                    <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className="btn btn--primary">
-                      <NavigationIcon />
-                      Get Directions
-                      <span className="sr-only"> (opens Google Maps in a new tab)</span>
-                    </a>
-                  ) : (
-                    <a href={clinic.phones[0].tel} className="btn btn--primary">
-                      <PhoneIcon />
-                      Call for Directions
-                    </a>
-                  )}
+              <p className="text-[10px] text-ink-muted uppercase tracking-widest text-center">
+                Open your camera and scan to save our location
+              </p>
+            </div>
+
+            <div className="rounded-xl bg-brand-aqua p-5 border border-mint">
+              <div className="flex items-center gap-3">
+                <PhoneIcon className="w-5 h-5 text-brand-teal flex-shrink-0" />
+                <div>
+                  <p className="text-[10px] text-ink-muted uppercase tracking-wide">
+                    Call for Appointment
+                  </p>
+                  <a href={clinic.phones[0].tel} className="text-base font-medium text-ink underline-offset-4 hover:underline">
+                    {clinic.phones[0].raw}
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Real photo of the signboard to help visitors recognise the building */}
-          <figure className="card flex flex-col overflow-hidden">
-            <div className="relative min-h-[240px] flex-1">
-              <Image
-                src={sign.src}
-                alt={sign.alt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 540px"
-                className="object-cover"
-              />
-            </div>
-            <figcaption className="flex items-center gap-3 px-6 py-4 text-sm text-ink-muted sm:px-8">
-              <MapPinIcon className="h-5 w-5 shrink-0 text-brand-teal" />
-              Look for our signboard — Eye, Dental &amp; General Medical Centre, Amruthalli.
-            </figcaption>
-          </figure>
+          {/* Directions button + map note */}
+          <div className="flex flex-col gap-4">
+            {directionsUrl ? (
+              <Link
+                href={directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 btn btn--primary px-8 py-4 text-base text-white font-semibold"
+              >
+                Get Directions
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+            ) : (
+              <div className="inline-flex items-center justify-center gap-2 btn btn--outline px-8 py-4 text-base text-brand-deep font-semibold disabled:opacity-50 disabled:pointer-events-none">
+                Get Directions
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
+            )}
+            <p className="text-xs text-ink-muted text-center">
+              {directionsUrl
+                ? "Opens in Google Maps in a new tab"
+                : "Map link pending clinic owner confirmation"}
+            </p>
+          </div>
         </div>
       </div>
     </section>
