@@ -38,14 +38,30 @@ export const clinic = {
 
   // Map/directions URL — [PLACEHOLDER] requiring verified map pin from owner.
   // e.g. "https://www.google.com/maps/place/?q=place_id:..." once supplied.
-  directionsUrl: "" as string | null,
+  directionsUrl: null as string | null,
 
   // Care values from the flyer — brand messaging only, not clinical claims.
   careValues: [
-    "Experienced Specialists",
-    "Advanced Technology",
-    "Personalised Treatment Plans",
-    "Compassionate Care",
+    {
+      title: "Experienced Specialists",
+      description: "A dedicated team committed to your wellbeing at every visit.",
+      icon: "users",
+    },
+    {
+      title: "Advanced Technology",
+      description: "Modern equipment to support careful, accurate assessment.",
+      icon: "chip",
+    },
+    {
+      title: "Personalised Treatment Plans",
+      description: "Care shaped around your needs, not a one-size-fits-all approach.",
+      icon: "clipboard",
+    },
+    {
+      title: "Compassionate Care",
+      description: "Kind, respectful support from your first call to follow-up.",
+      icon: "heart",
+    },
   ],
 
   services: [
@@ -83,12 +99,18 @@ export const clinic = {
     // Place the real QR at: public/images/location-qr.png (per CLAUDE.md)
     // Currently using the supplied SVG asset: public/images/location-qr.svg
     qr: "/images/location-qr.svg",
+    // Set to false once the real, scanner-tested QR image replaces the placeholder.
+    qrIsPlaceholder: true,
     // Real clinic photos supplied in the repository.
+    // Note: some file names do not match their content; the keys below
+    // describe what each photo actually shows.
     photos: {
-      exterior: "/images/clinic-exterior.webp",
-      reception: "/images/clinic-reception.webp",
-      examRoomA: "/images/clinic-exam-room.webp",
-      examRoomB: "/images/clinic-exam-room-2.webp",
+      signboard: { src: "/images/clinic-exterior.webp", width: 1080, height: 608, alt: "Sahara Health Cluster signboard above the clinic entrance in Amruthalli" },
+      streetView: { src: "/images/clinic-overflow.webp", width: 765, height: 1020, alt: "Street view of the Sahara Health Cluster building in Amruthalli, Bangalore" },
+      reception: { src: "/images/clinic-exam-room.webp", width: 1360, height: 1020, alt: "Reception desk and consultation rooms at Sahara Health Cluster" },
+      eyeRoom: { src: "/images/clinic-exam-room-2.webp", width: 1360, height: 1020, alt: "Eye examination room with diagnostic equipment at Sahara Health Cluster" },
+      eyeChair: { src: "/images/clinic-reception.webp", width: 765, height: 1020, alt: "Eye examination chair and slit lamp at Sahara Health Cluster" },
+      eyeRoomNarrow: { src: "/images/clinic-interior.webp", width: 765, height: 1020, alt: "Examination room at Sahara Health Cluster" },
     },
   },
 };
