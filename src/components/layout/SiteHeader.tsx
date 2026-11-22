@@ -3,15 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Logo } from "./Logo";
+import { Logo } from "@/components/brand/Logo";
 import { clinic } from "@/config/clinic";
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/#about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/#contact", label: "Contact" },
-];
+import { navLinks } from "@/config/navigation";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -44,21 +38,15 @@ export function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
-          {NAV_LINKS.map((l) => {
-            const active =
-              pathname === "/" && l.href === "/"
-                ? true
-                : pathname !== "/" && l.href.startsWith("/");
-            return (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="text-sm font-medium text-ink-muted transition-colors hover:text-brand-teal"
-              >
-                {l.label}
-              </Link>
-            );
-          })}
+          {navLinks.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="text-sm font-medium text-ink-muted transition-colors hover:text-brand-teal"
+            >
+              {l.label}
+            </Link>
+          ))}
         </nav>
 
         <a
@@ -98,7 +86,7 @@ export function SiteHeader() {
       {open && (
         <div className="border-t border-mint bg-white md:hidden">
           <nav className="section-container flex flex-col gap-1 py-3" aria-label="Primary">
-            {NAV_LINKS.map((l) => (
+            {navLinks.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}

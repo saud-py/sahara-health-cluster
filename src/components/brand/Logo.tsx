@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
  *
  * TODO: Replace the inner <svg> with the supplied logo asset.
  *   - Place the real logo file at: public/images/sahara-logo.png (or .svg)
+ *   - Also update ./BrandMark.tsx (used for the PNG icons and share image)
  *   - Update this component to render <img src="/images/sahara-logo.png" ... />
  *   - Do NOT invent a different brand mark.
  */

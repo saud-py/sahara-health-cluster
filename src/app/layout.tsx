@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { clinic } from "@/config/clinic";
 import { isIndexable, seo, siteUrl, tracking } from "@/config/site";
-import { Analytics } from "@/components/Analytics";
+import { Analytics } from "@/components/layout/Analytics";
 import "./globals.css";
 
 export const metadata: Metadata = {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { EyeIcon, ToothIcon, StethoscopeIcon } from "./icons";
+import { EyeIcon, ToothIcon, StethoscopeIcon } from "@/components/icons";
 
 type IconName = "eye" | "tooth" | "stethoscope";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { clinic } from "@/config/clinic";
-import { MapPinIcon, PhoneIcon } from "./icons";
+import { MapPinIcon, PhoneIcon } from "@/components/icons";
 
 export function LocationSection() {
   const directionsUrl = clinic.directionsUrl;

@@ -2,14 +2,8 @@
 
 import Link from "next/link";
 import { clinic } from "@/config/clinic";
-import { Logo } from "./Logo";
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/#about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/#contact", label: "Contact" },
-];
+import { navLinks } from "@/config/navigation";
+import { Logo } from "@/components/brand/Logo";
 
 export function SiteFooter() {
   const PHONES = clinic.phones;
@@ -31,7 +25,7 @@ export function SiteFooter() {
               Quick Links
             </h3>
             <ul className="space-y-3">
-              {NAV_LINKS.map((l) => (
+              {navLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}

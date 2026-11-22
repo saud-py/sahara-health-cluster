@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import { clinic } from "@/config/clinic";
-import { BrandMark } from "./brand-mark";
+import { BrandMark } from "@/components/brand/BrandMark";
 
 // PNG share image for WhatsApp, Facebook, LinkedIn, X and Google Discover.
 // (SVG share images are ignored by most platforms.)

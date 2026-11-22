@@ -1,6 +1,6 @@
 /**
- * Shared placeholder brand mark used by the generated PNG icons and the social
- * share image (next/og). Mirrors public/favicon.svg — replace together with the
+ * Placeholder brand mark used by the generated PNG icons and the social share
+ * image (src/app/icon.tsx, apple-icon.tsx, opengraph-image.tsx via next/og). Mirrors public/favicon.svg — replace together with the
  * real logo asset when it is supplied.
  */
 export function BrandMark({ size }: { size: number }) {

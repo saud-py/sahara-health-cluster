@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { clinic } from "@/config/clinic";
-import { PhoneIcon } from "./icons";
+import { PhoneIcon } from "@/components/icons";
 
 const PHONES = clinic.phones;
 

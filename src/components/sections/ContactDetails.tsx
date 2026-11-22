@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { clinic } from "@/config/clinic";
-import { PhoneIcon, MapPinIcon, ClockIcon } from "./icons";
+import { PhoneIcon, MapPinIcon, ClockIcon } from "@/components/icons";
 
 export function ContactDetails() {
   const PHONES = clinic.phones;
