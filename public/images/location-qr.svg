@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" role="img" aria-label="Placeholder: supply the location QR image here">
-  <rect width="200" height="200" fill="#ffffff"/>
-  <rect x="8" y="8" width="184" height="184" rx="12" fill="#E5F7F5" stroke="#009F9A" stroke-width="2"/>
-  <rect x="24" y="24" width="152" height="152" fill="#ffffff" stroke="#009F9A" stroke-width="1.5" stroke-dasharray="6 4"/>
-  <text x="100" y="96" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#006B68">LOCATION QR</text>
-  <text x="100" y="114" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#527174">PLACEHOLDER</text>
-  <text x="100" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#527174">Replace with supplied QR</text>
-</svg>

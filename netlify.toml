@@ -1,0 +1,39 @@
+# Netlify configuration for Sahara Health Cluster (Next.js App Router).
+# Netlify auto-installs its Next.js runtime; no plugin entry is required.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Security + quality headers (Google Ads landing-page review favours HTTPS-only,
+# well-behaved pages).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Long-lived caching for clinic photos and static brand assets.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# Keep deploy previews and branch deploys out of Google's index.
+[context.deploy-preview]
+  [[context.deploy-preview.headers]]
+    for = "/*"
+    [context.deploy-preview.headers.values]
+      X-Robots-Tag = "noindex, nofollow"

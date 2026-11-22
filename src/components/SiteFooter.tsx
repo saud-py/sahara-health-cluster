@@ -17,8 +17,8 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-mint bg-brand-deep text-white">
       <div className="section-container py-10 md:py-16">
-        <div className="grid gap-8 md:grid-cols-4">
-          <div className="col-span-4 md:col-span-1">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
+          <div className="sm:col-span-2 md:col-span-1">
             <Logo light showWordmark={false} className="mb-4" />
             <p className="text-sm text-brand-aqua/90 leading-relaxed">
               {clinic.trustLine}. Delivering experienced care with advanced
@@ -76,7 +76,7 @@ export function SiteFooter() {
             </p>
             <a
               href={clinic.phones[0].tel}
-              className="inline-flex items-center gap-2 btn btn--outline px-6 py-3 text-base text-white font-semibold border-white/30 hover:bg-white hover:text-brand-deep"
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-white/40 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white hover:text-brand-deep"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 0 7h0c0 2.06.42 4.11 1.23 5.74" /></svg>
               Call Now
@@ -89,8 +89,7 @@ export function SiteFooter() {
             &copy; {new Date().getFullYear()} {clinic.name}. All rights reserved.
           </p>
           <p className="text-xs text-brand-aqua/70">
-            Unverified details are marked as placeholders — please confirm with
-            the clinic before relying on them.
+            {clinic.tagline} · {clinic.address.full}
           </p>
         </div>
       </div>

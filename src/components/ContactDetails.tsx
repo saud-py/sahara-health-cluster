@@ -17,7 +17,7 @@ export function ContactDetails() {
           <h2 className="mt-4 text-3xl md:text-4xl text-ink">Contact Us</h2>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
           <div className="card flex flex-col gap-5 p-7">
             <div className="flex items-start gap-4">
               <MapPinIcon className="w-6 h-6 text-brand-teal flex-shrink-0" />
@@ -53,6 +53,7 @@ export function ContactDetails() {
             </div>
           </div>
 
+          {clinic.openingHours.length > 0 && (
           <div className="card flex flex-col gap-5 p-7">
             <div className="flex items-start gap-4">
               <ClockIcon className="w-6 h-6 text-brand-teal flex-shrink-0" />
@@ -60,24 +61,20 @@ export function ContactDetails() {
                 <p className="text-xs font-semibold uppercase tracking-wide text-brand-deep mb-1">
                   Opening Hours
                 </p>
-                {clinic.openingHours.length > 0 ? (
-                  <ul className="space-y-1 text-sm text-ink">
+                <ul className="space-y-1 text-sm text-ink">
                     {clinic.openingHours.map((h) => (
                       <li key={h.days}>
                         <span className="font-medium text-brand-deep">{h.days}</span>{" "}
                         {h.hours}
                       </li>
                     ))}
-                  </ul>
-                ) : (
-                  <span className="text-sm text-ink-muted">
-                    [Hours pending confirmation — call us]
-                  </span>
-                )}
+                </ul>
               </div>
             </div>
           </div>
+          )}
 
+          {clinic.email && (
           <div className="card flex flex-col gap-5 p-7">
             <div className="flex items-start gap-4">
               <div className="w-6 h-6 rounded-full bg-brand-mint flex items-center justify-center flex-shrink-0 text-brand-deep text-xs font-semibold">
@@ -87,19 +84,16 @@ export function ContactDetails() {
                 <p className="text-xs font-semibold uppercase tracking-wide text-brand-deep mb-1">
                   Write to Us
                 </p>
-                {clinic.email ? (
-                  <a
+                <a
                     href={`mailto:${clinic.email}`}
                     className="text-base font-medium text-ink underline-offset-4 hover:underline"
                   >
                     {clinic.email}
-                  </a>
-                ) : (
-                  <span className="text-sm text-ink-muted">[Email pending confirmation]</span>
-                )}
+                </a>
               </div>
             </div>
           </div>
+          )}
         </div>
       </div>
     </section>

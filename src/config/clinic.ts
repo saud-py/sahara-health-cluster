@@ -36,9 +36,8 @@ export const clinic = {
   // Opening days/hours are not confirmed. Omit from UI until verified.
   openingHours: [] as { days: string; hours: string }[],
 
-  // Map/directions URL — [PLACEHOLDER] requiring verified map pin from owner.
-  // e.g. "https://www.google.com/maps/place/?q=place_id:..." once supplied.
-  directionsUrl: "" as string | null,
+  // Verified Google Maps location link supplied by the clinic owner.
+  directionsUrl: "https://share.google/p1GJIP2A7oOGMtrrh" as string | null,
 
   // Care values from the flyer — brand messaging only, not clinical claims.
   careValues: [
@@ -79,10 +78,10 @@ export const clinic = {
 
   // Assets
   assets: {
-    // Placeholder QR — replace with the real supplied QR image.
-    // Place the real QR at: public/images/location-qr.png (per CLAUDE.md)
-    // Currently using the supplied SVG asset: public/images/location-qr.svg
-    qr: "/images/location-qr.svg",
+    // Supplied location QR (524×512). Served unmodified — do not crop, tint or re-encode.
+    qr: { src: "/images/location-qr.png", width: 524, height: 512 },
+    // Supplied brand visual (eye mark with service badges), used in the hero.
+    brandVisual: { src: "/images/sahara-brand-mark.png", width: 950, height: 782 },
     // Real clinic photos supplied in the repository.
     photos: {
       exterior: "/images/clinic-exterior.webp",

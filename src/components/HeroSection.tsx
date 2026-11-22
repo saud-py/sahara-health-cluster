@@ -1,19 +1,10 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
 import { clinic } from "@/config/clinic";
 import { PhoneIcon } from "./icons";
 
 const PHONES = clinic.phones;
 
 export function HeroSection() {
-  const [reveal, setReveal] = useState(false);
-
-  useEffect(() => {
-    setReveal(true);
-  }, []);
-
   return (
     <section
       className="relative overflow-hidden"
@@ -34,25 +25,20 @@ export function HeroSection() {
           <span
             className={[
               "inline-block rounded-full bg-brand-mint px-3 py-1 text-xs font-semibold text-brand-deep tracking-wide",
-              reveal ? "animate-[fade-up_0.6s_ease-out_both]" : "opacity-0",
+              "animate-[fade-up_0.6s_ease-out_both]",
             ].join(" ")}
             style={{ animationDelay: "0.05s" }}
           >
             {clinic.tagline}
           </span>
 
-          <h1 className={[
-            "text-display text-4xl md:text-5xl font-bold text-ink leading-[1.15] tracking-tight",
-            reveal ? "animate-[fade-up_0.6s_ease-out_both]" : "opacity-0",
-          ].join(" ")}
-            style={{ animationDelay: "0.2s" }}
-          >
+          <h1 className="text-display text-4xl md:text-5xl font-bold text-ink leading-[1.15] tracking-tight">
             {clinic.campaignHeadline}
           </h1>
 
           <p className={[
             "text-lg md:text-xl text-brand-deep/90 leading-relaxed",
-            reveal ? "animate-[fade-up_0.6s_ease-out_both]" : "opacity-0",
+            "animate-[fade-up_0.6s_ease-out_both]",
           ].join(" ")}
             style={{ animationDelay: "0.35s" }}
           >
@@ -61,27 +47,30 @@ export function HeroSection() {
 
           <p className={[
             "text-base text-ink-muted",
-            reveal ? "animate-[fade-up_0.6s_ease-out_both]" : "opacity-0",
+            "animate-[fade-up_0.6s_ease-out_both]",
           ].join(" ")}
             style={{ animationDelay: "0.5s" }}
           >
             {clinic.address.full}
           </p>
 
-          <div className={["mt-7 flex flex-wrap gap-3", reveal ? "animate-[fade-up_0.6s_ease-out_both]" : "opacity-0"].join(" ")} style={{ animationDelay: "0.65s" }}>
-            <Link
+          <div className={["mt-7 flex flex-wrap gap-3", "animate-[fade-up_0.6s_ease-out_both]"].join(" ")} style={{ animationDelay: "0.65s" }}>
+            <a
               href={clinic.phones[0].tel}
               className="btn btn--primary px-6 py-3 text-base flex items-center gap-2"
             >
               <PhoneIcon className="w-5 h-5" />
               Call for an Appointment
-            </Link>
-            <Link
-              href="#location"
+            </a>
+            <a
+              href={clinic.directionsUrl || "#location"}
+              data-track="directions"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn--outline px-6 py-3 text-base flex items-center gap-2"
             >
               Get Directions
-            </Link>
+            </a>
           </div>
 
           <div className="mt-8 flex items-center gap-4 text-sm text-ink-muted">
@@ -96,30 +85,17 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Right: abstract brand motif — eye/spiral SVG, no human photography */}
-        <div className={["flex justify-center relative", reveal ? "animate-[fade-up_0.8s_ease-out_both]" : "opacity-0"].join(" ")} style={{ animationDelay: "0.4s" }}>
-          <div className="relative z-10 max-w-md mx-auto">
-            <svg
-              viewBox="0 0 200 200"
-              className="w-full max-w-[340px]"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#009F9A" />
-                  <stop offset="100%" stopColor="#006B68" />
-                </linearGradient>
-              </defs>
-              <circle cx="100" cy="100" r="90" fill="url(#heroGrad)" />
-              <circle cx="100" cy="100" r="62" fill="none" stroke="#08B7B0" strokeWidth="10" strokeDasharray="60 40" />
-              <path d="M55 100 Q55 60 100 60 Q145 60 145 100 Q145 140 100 140 Q55 140 55 100" fill="none" stroke="white" strokeWidth="5" strokeLinecap="round" />
-              <circle cx="100" cy="100" r="7" fill="white" />
-            </svg>
-            <p className="absolute -bottom-10 left-0 right-0 text-xs text-brand-deep/70 text-center font-medium tracking-widest uppercase">
-              Eye · Dental · General Medical Centre
-            </p>
-          </div>
+        {/* Right: supplied brand visual (no animation — it is the LCP image) */}
+        <div className="flex justify-center relative">
+          <Image
+            src={clinic.assets.brandVisual.src}
+            alt="Sahara Health Cluster eye mark with Eye Care, Dental Care and General Medicine"
+            width={clinic.assets.brandVisual.width}
+            height={clinic.assets.brandVisual.height}
+            priority
+            sizes="(max-width: 1024px) 90vw, 520px"
+            className="h-auto w-full max-w-[520px]"
+          />
         </div>
       </div>
 

@@ -1,91 +1,148 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { clinic } from "@/config/clinic";
+import { isIndexable, seo, siteUrl, tracking } from "@/config/site";
+import { Analytics } from "@/components/Analytics";
 import "./globals.css";
 
-const siteUrl = "https://saharahealthcluster.in"; // [PLACEHOLDER — confirm domain]
-
 export const metadata: Metadata = {
-  title: "Sahara Health Cluster — Eye, Dental & General Medical Centre",
-  description:
-    "Sahara Health Cluster in Amruthalli, Bangalore — Eye, Dental and General Medical Centre. Trusted care, advanced technology. Book an appointment today.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: seo.title,
+    template: `%s | ${seo.shortTitle}`,
+  },
+  description: seo.description,
+  applicationName: clinic.name,
   keywords: [
     "Sahara Health Cluster",
-    "eye care",
-    "dental care",
-    "general medical centre",
-    "Amruthalli",
-    "Bangalore",
-    "clinic",
+    "clinic in Amruthalli",
+    "eye clinic Amruthalli",
+    "dental clinic Amruthalli",
+    "general physician Amruthalli",
+    "eye care Bangalore",
+    "dental care Bangalore",
+    "medical centre Bangalore 560092",
   ],
-  authors: [{ name: "Sahara Health Cluster" }],
-  creator: "Sahara Health Cluster",
-  publisher: "Sahara Health Cluster",
-  metadataBase: new URL(siteUrl),
+  authors: [{ name: clinic.name }],
+  creator: clinic.name,
+  publisher: clinic.name,
+  category: "health",
   alternates: { canonical: "/" },
+  formatDetection: { telephone: true, address: true, email: false },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Sahara Health Cluster — Eye, Dental & General Medical Centre",
-    description:
-      "Sahara Health Cluster in Amruthalli, Bangalore — Eye, Dental and General Medical Centre. Trusted care, advanced technology. Book an appointment today.",
-    url: siteUrl,
-    siteName: "Sahara Health Cluster",
+    title: seo.title,
+    description: seo.description,
+    url: "/",
+    siteName: clinic.name,
     type: "website",
     locale: "en_IN",
-    images: [
-      {
-        url: "/og-cover.svg",
-        width: 1200,
-        height: 630,
-        alt: "Sahara Health Cluster — Eye, Dental & General Medical Centre",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sahara Health Cluster — Eye, Dental & General Medical Centre",
-    description:
-      "Sahara Health Cluster in Amruthalli, Bangalore — Eye, Dental and General Medical Centre. Trusted care, advanced technology. Book an appointment today.",
-    images: ["/og-cover.svg"],
+    title: seo.title,
+    description: seo.description,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: isIndexable
+    ? {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+        },
+      }
+    : { index: false, follow: false },
+  verification: tracking.googleSiteVerification
+    ? { google: tracking.googleSiteVerification }
+    : undefined,
 };
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#009F9A",
+};
+
+function structuredData() {
+  const telephones = clinic.phones.map((p) => `+91${p.raw}`);
+  const clinicNode = {
+    "@type": ["MedicalClinic", "LocalBusiness"],
+    "@id": `${siteUrl}/#clinic`,
+    name: clinic.name,
+    slogan: clinic.brandLine,
+    description: `${clinic.name} — ${clinic.tagline} in ${clinic.address.full}.`,
+    url: `${siteUrl}/`,
+    logo: `${siteUrl}/icon`,
+    image: [
+      `${siteUrl}/images/clinic-exterior.webp`,
+      `${siteUrl}/images/clinic-reception.webp`,
+      `${siteUrl}/images/clinic-interior.webp`,
+    ],
+    telephone: telephones[0],
+    contactPoint: telephones.map((telephone) => ({
+      "@type": "ContactPoint",
+      telephone,
+      contactType: "appointments",
+      areaServed: "IN",
+      availableLanguage: ["en"],
+    })),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: clinic.address.line1,
+      addressLocality: clinic.address.city,
+      addressRegion: "Karnataka",
+      postalCode: "560092",
+      addressCountry: "IN",
+    },
+    areaServed: { "@type": "City", name: "Bangalore" },
+    medicalSpecialty: ["Optometric", "Dentistry", "PrimaryCare"],
+    availableService: clinic.services.map((s) => ({
+      "@type": "MedicalTherapy",
+      name: s.title,
+      description: s.description,
+    })),
+    isAcceptingNewPatients: true,
+    ...(clinic.directionsUrl ? { hasMap: clinic.directionsUrl } : {}),
+    ...(clinic.email ? { email: clinic.email } : {}),
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      clinicNode,
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        url: `${siteUrl}/`,
+        name: clinic.name,
+        inLanguage: "en-IN",
+        publisher: { "@id": `${siteUrl}/#clinic` },
+      },
+    ],
+  };
+}
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    name: clinic.name,
-    description: `${clinic.name} — ${clinic.tagline} in ${clinic.address.full}.`,
-    url: siteUrl,
-    telephone: clinic.phones.map((p) => p.tel),
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: clinic.address.line1,
-      addressLocality: clinic.address.city,
-      postalCode: "560092",
-      addressCountry: "IN",
-    },
-  };
-
   return (
     <html lang="en-IN" className="scroll-smooth">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta charSet="utf-8" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData()) }}
         />
       </head>
       <body className="min-h-screen bg-white text-ink antialiased">
@@ -93,6 +150,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );

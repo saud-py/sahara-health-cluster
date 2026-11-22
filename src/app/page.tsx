@@ -5,6 +5,7 @@ import { ServicesSection } from "@/components/ServicesSection";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { AppointmentCTA } from "@/components/AppointmentCTA";
 import { LocationSection } from "@/components/LocationSection";
+import { FaqSection } from "@/components/FaqSection";
 import { ContactDetails } from "@/components/ContactDetails";
 import { SiteFooter } from "@/components/SiteFooter";
 import { MobileActionBar } from "@/components/MobileActionBar";
@@ -20,6 +21,7 @@ export default function Home() {
         <WhyChooseUs />
         <AppointmentCTA />
         <LocationSection />
+        <FaqSection />
         <ContactDetails />
       </main>
       <SiteFooter />

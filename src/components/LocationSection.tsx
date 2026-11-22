@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { clinic } from "@/config/clinic";
@@ -41,20 +39,16 @@ export function LocationSection() {
               </p>
               <div className="qr-wrap">
                 <Image
-                  src={qrSrc}
-                  alt="Location QR code for Sahara Health Cluster, Amruthalli Bangalore"
-                  width={200}
-                  height={200}
-                  priority
-                  className="rounded-lg border border-mint shadow-sm"
-                  onError={(e) => {
-                    const img = e.currentTarget;
-                    img.style.display = "none";
-                  }}
+                  src={qrSrc.src}
+                  alt="QR code — scan to open Sahara Health Cluster's location in Google Maps"
+                  width={qrSrc.width}
+                  height={qrSrc.height}
+                  unoptimized
+                  className="bg-white"
                 />
               </div>
               <p className="text-[10px] text-ink-muted uppercase tracking-widest text-center">
-                Open your camera and scan to save our location
+                Open your phone camera and scan for directions
               </p>
             </div>
 
@@ -78,6 +72,7 @@ export function LocationSection() {
             {directionsUrl ? (
               <Link
                 href={directionsUrl}
+                data-track="directions"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 btn btn--primary px-8 py-4 text-base text-white font-semibold"
@@ -88,17 +83,18 @@ export function LocationSection() {
                 </svg>
               </Link>
             ) : (
-              <div className="inline-flex items-center justify-center gap-2 btn btn--outline px-8 py-4 text-base text-brand-deep font-semibold disabled:opacity-50 disabled:pointer-events-none">
-                Get Directions
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </div>
+              <a
+                href={clinic.phones[0].tel}
+                className="inline-flex items-center justify-center gap-2 btn btn--outline px-8 py-4 text-base text-brand-deep font-semibold"
+              >
+                <PhoneIcon className="w-5 h-5" />
+                Call us for directions
+              </a>
             )}
             <p className="text-xs text-ink-muted text-center">
               {directionsUrl
                 ? "Opens in Google Maps in a new tab"
-                : "Map link pending clinic owner confirmation"}
+                : "Our team will guide you to the centre over the phone"}
             </p>
           </div>
         </div>

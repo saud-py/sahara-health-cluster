@@ -33,7 +33,7 @@ export function AboutSection() {
               {clinic.trustLine}
             </h2>
             <p className="text-base text-ink-muted leading-relaxed">
-              {clinic.name} is a {clinic.tagline.toLowerCase()} based in {clinic.address.full}.
+              {clinic.name} is an {clinic.tagline.toLowerCase().replace("&", "and")} based in {clinic.address.full}.
               Our mission is simple: to deliver {clinic.brandLine.toLowerCase()} through
               experienced specialists, advanced technology, and compassionate, personalised care.
             </p>

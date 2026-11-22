@@ -40,7 +40,7 @@ export function SiteHeader() {
       ].join(" ")}
     >
       <div className="section-container flex h-16 items-center justify-between gap-4">
-        <Logo light={scrolled} showWordmark />
+        <Logo showWordmark />
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -63,7 +63,7 @@ export function SiteHeader() {
 
         <a
           href={clinic.phones[0].tel}
-          className="hidden sm:inline-flex btn btn--primary px-5 py-2.5 text-sm"
+          className="hidden sm:inline-flex whitespace-nowrap btn btn--primary px-5 py-2.5 text-sm"
         >
           Call Now
         </a>

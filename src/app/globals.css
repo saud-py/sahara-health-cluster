@@ -164,12 +164,11 @@ a.underline-offset-4:hover {
 }
 .qr-wrap img {
   display: block;
-  width: 160px;
-  height: 160px;
-  object-fit: contain;
+  width: 200px;
+  height: auto; /* preserve the supplied QR's aspect ratio */
 }
 @media (min-width: 640px) {
-  .qr-wrap img { width: 200px; height: 200px; }
+  .qr-wrap img { width: 240px; }
 }
 
 /* Sticky mobile bottom action bar */

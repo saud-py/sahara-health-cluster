@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { clinic } from "@/config/clinic";
 
 export function MobileActionBar() {
@@ -16,7 +15,13 @@ export function MobileActionBar() {
         </svg>
         <span>Call</span>
       </a>
-      <a href="#location" aria-label="Get directions">
+      <a
+        href={clinic.directionsUrl || "#location"}
+        data-track="directions"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Get directions in Google Maps"
+      >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
           <circle cx="12" cy="10" r="3" />
